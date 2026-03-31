@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "0VZ/UR516JE=",
+  "success": true,
+  "projectFilePath": "/Users/macle/Desktop/CursoBK/UserApi/UserApi.csproj",
+  "expectedPackageFiles": [
+    "/Users/macle/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/macle/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

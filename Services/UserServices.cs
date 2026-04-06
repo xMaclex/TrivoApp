@@ -1,50 +1,147 @@
 using UserApi.DTOs;
 using UserApi.Models;
+using UserApi.Repositories.Interfaces;
 
 namespace UserApi.Services;
 
 public class UserServices
 {
-    private static List<User> users = new();
+    private readonly IUserRepository _userRepository;
+    private readonly IRoleRepository _roleRepository;
+    private readonly IActivityLogRepository _activityLogRepository;
 
-    public List<User> GetAll()
+    public UserServices(
+        IUserRepository userRepository,
+        IRoleRepository roleRepository,
+        IActivityLogRepository activityLogRepository)
     {
-        return users;
+        _userRepository = userRepository;
+        _roleRepository = roleRepository;
+        _activityLogRepository = activityLogRepository;
     }
-    public User Add(CreateUserDto dto)
+
+    public async Task<List<UserResponseDto>> GetAllAsync()
+    {
+        var users = await _userRepository.GetAllAsync();
+
+        return users.Select(u => MapToDto(u)).ToList();
+    }
+
+    public async Task<UserResponseDto?> GetByIdAsync(int id)
+    {
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user == null) return null;
+
+        return MapToDto(user);
+    }
+
+    public async Task<UserResponseDto> AddAsync(CreateUserDto dto)
     {
         var user = new User
         {
-            Id = users.Count + 1,
             Name = dto.Name,
             Email = dto.Email
         };
 
-        users.Add(user);
-        return user;
+        await _userRepository.AddAsync(user);
+        await _userRepository.SaveChangesAsync();
+
+        // El log se registra después de SaveChanges porque necesitamos el Id del user
+        var log = new ActivityLog
+        {
+            Action = $"Usuario '{dto.Name}' creado",
+            UserId = user.Id,
+            CreatedAt = DateTime.UtcNow
+        };
+        await _activityLogRepository.AddAsync(log);
+        await _activityLogRepository.SaveChangesAsync();
+
+        return MapToDto(user);
     }
 
-    public User Update(int id, CreateUserDto dto)
+    public async Task<UserResponseDto?> UpdateAsync(int id, CreateUserDto dto)
     {
-        var user = users.FirstOrDefault(x => x.Id == id);
-
-        if (user == null)
-            return null;
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user == null) return null;
 
         user.Name = dto.Name;
         user.Email = dto.Email;
 
-        return user;
+        await _userRepository.UpdateAsync(user);
+
+        var log = new ActivityLog
+        {
+            Action = $"Usuario actualizado: nombre='{dto.Name}', email='{dto.Email}'",
+            UserId = user.Id,
+            CreatedAt = DateTime.UtcNow
+        };
+        await _activityLogRepository.AddAsync(log);
+
+        await _userRepository.SaveChangesAsync();
+
+        return MapToDto(user);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var user = users.FirstOrDefault(x => x.Id == id);
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user == null) return false;
 
-        if(user == null)
-        return false;
-
-        users.Remove(user);
+        await _userRepository.DeleteAsync(user);
+        await _userRepository.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<bool> AssignRoleAsync(int userId, AssignRoleDto dto)
+    {
+        var user = await _userRepository.GetByIdAsync(userId);
+        if (user == null) return false;
+
+        var role = await _roleRepository.GetByIdAsync(dto.RoleId);
+        if (role == null) return false;
+
+        // Verificar con LINQ si ya tiene ese rol
+        bool alreadyHasRole = user.UserRoles.Any(ur => ur.RoleId == dto.RoleId);
+        if (alreadyHasRole) return false;
+
+        user.UserRoles.Add(new UserRole
+        {
+            UserId = userId,
+            RoleId = dto.RoleId,
+            AssignedAt = DateTime.UtcNow
+        });
+
+        var log = new ActivityLog
+        {
+            Action = $"Rol '{role.Name}' asignado al usuario",
+            UserId = userId,
+            CreatedAt = DateTime.UtcNow
+        };
+        await _activityLogRepository.AddAsync(log);
+
+        await _userRepository.SaveChangesAsync();
+        return true;
+    }
+
+    // Método privado para mapear entidad a DTO (evita repetir código)
+    private static UserResponseDto MapToDto(User user)
+    {
+        return new UserResponseDto
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            Roles = user.UserRoles
+                .Select(ur => ur.Role?.Name ?? "")
+                .ToList(),
+            RecentActivity = user.ActivityLogs
+                .OrderByDescending(a => a.CreatedAt)
+                .Select(a => new ActivityLogDto
+                {
+                    Action = a.Action,
+                    CreatedAt = a.CreatedAt
+                })
+                .ToList()
+        };
     }
 }

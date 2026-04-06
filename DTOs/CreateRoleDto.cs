@@ -1,6 +1,6 @@
 namespace UserApi.DTOs;
 
-public class CreateRole
+public class CreateRoleDto
 {
     public string? Name { get; set; }
 }

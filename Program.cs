@@ -1,18 +1,28 @@
-using UserApi.Services;
 using Microsoft.EntityFrameworkCore;
 using UserApi.Data;
+using UserApi.Repositories;
+using UserApi.Repositories.Interfaces;
+using UserApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Base de datos PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options => 
 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Repositories — Scoped: una instancia por request HTTP
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
 
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+// Services — Scoped también porque depende de los repositories
+builder.Services.AddScoped<UserServices>();
 builder.Services.AddOpenApi();
 
-builder.Services.AddSingleton<UserServices>();
+//builder.Services.AddSingleton<UserServices>();
 builder.Services.AddControllers();
 
 var app = builder.Build();

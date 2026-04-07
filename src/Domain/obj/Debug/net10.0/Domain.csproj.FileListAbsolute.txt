@@ -1,0 +1,5 @@
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net10.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net10.0/Domain.AssemblyInfoInputs.cache
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net10.0/Domain.AssemblyInfo.cs
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net10.0/Domain.csproj.CoreCompileInputs.cache
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net10.0/Domain.sourcelink.json

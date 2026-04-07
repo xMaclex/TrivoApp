@@ -1,37 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using Infrastructure.Data;
-using Infrastructure.Repositories;
-using Domain.Interfaces;
-using Application.Services;
-
 var builder = WebApplication.CreateBuilder(args);
-
-//Base de datos PostgreSQL
-builder.Services.AddDbContext<AppDbContext>(options => 
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Repositories — Scoped: una instancia por request HTTP
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
-
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-// Services — Scoped también porque depende de los repositories
-builder.Services.AddScoped<UserServices>();
 builder.Services.AddOpenApi();
 
-//builder.Services.AddSingleton<UserServices>();
-builder.Services.AddControllers();
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    
     app.MapOpenApi();
 }
 
@@ -56,7 +33,6 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.MapControllers();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

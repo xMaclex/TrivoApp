@@ -5,7 +5,7 @@ namespace Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<UserServices>();
         services.AddScoped<RoleService>();

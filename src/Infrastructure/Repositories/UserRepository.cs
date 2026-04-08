@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Infrastructure.Data;
 using Domain.Entities;
 using Domain.Interfaces;
+using Infrastructure.Persistence;
 
 namespace Infrastructure.Repositories;
 
@@ -46,13 +46,14 @@ public class UserRepository : IUserRepository
     {
         _context.Users.Update(user);
     }
+
     public async Task DeleteAsync(User user)
     {
         _context.Users.Remove(user);
     }
+
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();
     }
-
 }

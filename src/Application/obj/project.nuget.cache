@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WKVLqvqG4KU=",
+  "dgSpecHash": "DtO9HlPN+y0=",
   "success": true,
   "projectFilePath": "/Users/macle/Desktop/CursoBK/UserApi/src/Application/Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/macle/.nuget/packages/microsoft.extensions.dependencyinjection/10.0.5/microsoft.extensions.dependencyinjection.10.0.5.nupkg.sha512",
+    "/Users/macle/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.5/microsoft.extensions.dependencyinjection.abstractions.10.0.5.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -4,6 +4,7 @@ public class User
     public int Id { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     // One-to-Many: un usuario tiene muchos logs de actividad
     public ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>();

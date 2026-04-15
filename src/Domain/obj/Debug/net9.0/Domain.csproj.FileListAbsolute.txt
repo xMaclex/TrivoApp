@@ -1,0 +1,10 @@
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/bin/Debug/net9.0/Domain.deps.json
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/bin/Debug/net9.0/Domain.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/bin/Debug/net9.0/Domain.pdb
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/Domain.csproj.CoreCompileInputs.cache
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/Domain.sourcelink.json
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/Domain.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/refint/Domain.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/Domain.pdb
+/Users/macle/Desktop/CursoBK/UserApi/src/Domain/obj/Debug/net9.0/ref/Domain.dll

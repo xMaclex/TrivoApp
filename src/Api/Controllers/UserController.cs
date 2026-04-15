@@ -1,6 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
 using Application.DTOs;
-using Application.Services;
+using Application.Users.Commands.AssignRole;
+using Application.Users.Commands.CreateUser;
+using Application.Users.Commands.DeleteUser;
+using Application.Users.Commands.UpdateUser;
+using Application.Users.Queries.GetAllUsers;
+using Application.Users.Queries.GetUserByid;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
@@ -8,58 +14,57 @@ namespace Api.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UserServices _userService;
+    private readonly IMediator _mediator;
 
-    public UserController(UserServices userService)
+    public UserController(IMediator mediator)
     {
-        _userService = userService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
-        var users = await _userService.GetAllAsync();
-        return Ok(users);
+        var result = await _mediator.Send(new GetAllUsersQuery());
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
-        var user = await _userService.GetByIdAsync(id);
-        if (user == null) return NotFound();
-        return Ok(user);
+        var result = await _mediator.Send(new GetUserByIdQuery(id));
+        if (result == null) return NotFound();
+        return Ok(result);
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateUser(CreateUserDto dto)
     {
-        var user = await _userService.AddAsync(dto);
-        return Created($"/api/user/{user.Id}", user);
+        var result = await _mediator.Send(new CreateUserCommand(dto.Name, dto.Email));
+        return Created($"/api/user/{result.Id}", result);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, CreateUserDto dto)
     {
-        var user = await _userService.UpdateAsync(id, dto);
-        if (user == null) return NotFound();
-        return Ok(user);
+        var result = await _mediator.Send(new UpdateUserCommand(id, dto.Name, dto.Email));
+        if (result == null) return NotFound();
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
-        var deleted = await _userService.DeleteAsync(id);
+        var deleted = await _mediator.Send(new DeleteUserCommand(id));
         if (!deleted) return NotFound();
         return NoContent();
     }
 
-    // POST /api/user/1/roles
     [HttpPost("{id}/roles")]
     public async Task<IActionResult> AssignRole(int id, AssignRoleDto dto)
     {
-        var assigned = await _userService.AssignRoleAsync(id, dto);
+        var assigned = await _mediator.Send(new AssignRoleCommand(id, dto.RoleId));
         if (!assigned)
-            return BadRequest(new { message = "No se pudo asignar el rol. Verifica que el usuario y el rol existen, o que el usuario no tenga ya ese rol." });
+            return BadRequest(new { message = "No se pudo asignar el rol." });
 
         return Ok(new { message = "Rol asignado correctamente" });
     }

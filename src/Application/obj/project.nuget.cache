@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "lni2MPHmEmE=",
+  "dgSpecHash": "y5II4KPCoXQ=",
   "success": true,
   "projectFilePath": "/Users/macle/Desktop/CursoBK/UserApi/src/Application/Application.csproj",
   "expectedPackageFiles": [
+    "/Users/macle/.nuget/packages/bcrypt.net-next/4.1.0/bcrypt.net-next.4.1.0.nupkg.sha512",
     "/Users/macle/.nuget/packages/mediatr/13.1.0/mediatr.13.1.0.nupkg.sha512",
     "/Users/macle/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/macle/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",

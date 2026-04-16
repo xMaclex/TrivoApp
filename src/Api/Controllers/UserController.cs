@@ -6,12 +6,14 @@ using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetAllUsers;
 using Application.Users.Queries.GetUserByid;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize] // todos los endpoints requieren token
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -37,6 +39,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")] // solo admins pueden crear usuarios
     public async Task<IActionResult> CreateUser(CreateUserDto dto)
     {
         var result = await _mediator.Send(new CreateUserCommand(dto.Name, dto.Email));
@@ -44,6 +47,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateUser(int id, CreateUserDto dto)
     {
         var result = await _mediator.Send(new UpdateUserCommand(id, dto.Name, dto.Email));
@@ -52,6 +56,7 @@ public class UserController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         var deleted = await _mediator.Send(new DeleteUserCommand(id));
@@ -60,6 +65,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("{id}/roles")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AssignRole(int id, AssignRoleDto dto)
     {
         var assigned = await _mediator.Send(new AssignRoleCommand(id, dto.RoleId));

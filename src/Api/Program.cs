@@ -1,3 +1,4 @@
+using Api.Middleware;
 using Application;
 using Infrastructure;
 
@@ -17,6 +18,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+// El middleware de excepciones va primero
+ app.UseMiddleware<ExceptionMiddleware>();
+
+// El orden importa: Authentication antes que Authorization
+ app.UseAuthentication();
+ app.UseAuthorization();
 
 app.UseHttpsRedirection();
 app.MapControllers();

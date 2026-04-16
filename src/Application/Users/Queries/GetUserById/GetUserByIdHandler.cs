@@ -23,7 +23,7 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserResponse
             Id = user.Id,
             Name = user.Name,
             Email = user.Email,
-            //CreatedAt = user.CreatedAt,
+            CreatedAt = user.CreatedAt,
             Roles = user.UserRoles
                 .Select(ur => ur.Role?.Name ?? "")
                 .ToList(),

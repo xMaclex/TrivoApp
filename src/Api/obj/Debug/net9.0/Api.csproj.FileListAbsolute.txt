@@ -6,9 +6,11 @@
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Api.runtimeconfig.json
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Api.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Api.pdb
+/Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/BCrypt.Net-Next.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Humanizer.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/MediatR.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/MediatR.Contracts.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.Build.Locator.dll
@@ -26,6 +28,8 @@
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Microsoft.OpenApi.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/Mono.TextTemplating.dll
@@ -37,6 +41,7 @@
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/System.Composition.Hosting.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/System.Composition.Runtime.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/System.Composition.TypedParts.dll
+/Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.resources.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.resources.dll
 /Users/macle/Desktop/CursoBK/UserApi/src/Api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.resources.dll
